@@ -5,10 +5,10 @@ description: >
   A protocol layer database proxy
 lang: en-US
 
-baseurl: "/athena.github.io" # the subpath of your site, e.g. /blog/
-url: https://athena-proxy.github.io/athena.github.io # the base hostname & protocol for your site
-git_address: https://athena-proxy.github.io/athena.github.io
-git_edit_address: https://athena-proxy.github.io/athena.github.io/blob/gh-pages
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: http://athena-proxy.github.io # the base hostname & protocol for your site
+git_address: http://athena-proxy.io
+git_edit_address: http://athena-proxy.io/blob/gh-pages
 
 # theme options from https://bootswatch.com/3/
 # comment out this to use default Bootstrap
