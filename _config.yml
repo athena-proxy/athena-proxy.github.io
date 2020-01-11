@@ -2,8 +2,7 @@
 title: athena-proxy
 email: tanpeng.net@gmail.com
 description: >
-  Jekyll Template for Project Websites
-  providing documentation and blog post pages.
+  A protocol layer database proxy
 lang: en-US
 
 baseurl: "/athena.github.io" # the subpath of your site, e.g. /blog/
