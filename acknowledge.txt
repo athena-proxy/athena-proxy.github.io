@@ -1,0 +1,1 @@
+Many thanks to the https://github.com/aksakalli/jekyll-doc-theme for providing this fantastic jekyll-doc-theme。
