@@ -2,6 +2,7 @@
 ## how to write docs
 under dir: ./_docs
 use markdown
+you can mdkir or write docs under the path: _docs/ directly
 
 ## how to write blog
 under dir: ./_posts  
