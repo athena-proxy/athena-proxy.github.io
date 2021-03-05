@@ -1,11 +1,3 @@
-- title: Getting Started
+- title: DAL接入
   docs:
-  - home
-  - themes
-  - customization
-
-- title: Examples
-  docs:
-  - cheatsheet
-  - font-awesome
-  - bootstrap
+  - sharding-limit
