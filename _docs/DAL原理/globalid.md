@@ -21,14 +21,14 @@ Globalld最初的目的是为了配合Athena第一个Sharding客户订单表的S
 
 为了支持多机房部署，同一个逻辑的Globalld在不同机房会使用不同的种子范围，这些范围是保证分段不重合的。也就是说，对于同一个Globalld的种 子在dal_sequences表中会有多条记录，不同的机房使用不同的种子范围。结合下面的种子样例，实际的种子名是逻辑种子名+ezone后缀作为seq name存入的。不同ezone使用不同的种子。
 
-# 实际dal_sequences数据样例
+## 实际dal_sequences数据样例
 
 | seq name  | last_ value | is_ delete |
 | --------- | ----------- | ---------- |
 | xx_ezone1 | 0           | 0          |
 | xx_ezone2 | 1000000     | 0          |
 
-# dal_ sequences表结构
+## dal_ sequences表结构
 
 ```sql
 CREATE TABLE `dal_sequences` (

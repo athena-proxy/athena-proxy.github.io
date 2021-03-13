@@ -28,7 +28,7 @@ permalink: /docs/sharding-limit/
    如果update更新了shardingkey的值，改变了data row与表的分片规则，比如原值是10，update成了11，按照路由规则就变了，但是这条记录还在10对应的分表里面，当业务按照新的值11去查询这条记录的时候，就会发现查询不到这条记录(因为update之后记录还在10对应的表里面) .
 
 9. 对于mapping方案，需要注意3点:
-   a.采用mapping方案的前提是mappingkey和shardingkey是一对一或者多对的对应关系，不支持一对多或多对多的关系。
+   a.采用mapping方案的前提是mappingkey和shardingkey是一对一或者多对一的对应关系，不支持一对多或多对多的关系。
 
    b. 如果在insert时无法构建mapping关系(无法获取mappingkey的值)，需要申请新的sharding表存mapping关系，由业务方自行维护。
 
@@ -82,21 +82,19 @@ permalink: /docs/sharding-limit/
 
     13. sharding之后，不建议按照原先的自增主键进行查询,结果可能不符合预期
 
-    14. 如果存在多个dalgroup都需要获取globalid时,不允许多个dalgroup去获取相同sharding表的globalid,即同一个globalid只能隶属于单个dalgroup
+    14. 如果SQL中有shardingkey between ? and?, DAL对此语法视而不见。对于select SQL,将会采取扫全片的方式查询
 
-    15. 如果SQL中有shardingkey between ? and?, DAL对此语法视而不见。对于select SQL,将会采取扫全片的方式查询
+    15. 只支持select/update/insert/delete/show语句
 
-    16. 只支持select/update/insert/delete/truncate/show语句
+    16. 不支持replace into, on duplicate key update,替换为insert into...  select...form dual where not exists (..);
 
-    17. 不支持replace into, on duplicate key update,替换为insert into...  select...form dual where not exists (..);
+    17.  MySQL sharding的语句中值必须使用单引号，不支持双引号
 
-    18.  MySQL sharding的语句中值必须使用单引号，不支持双引号
+    18. where in (mappingkey)当mappingkey数量大于分表个数时，会不再查询mapping表，全直接全部扫业务sharding表，建议in mappingkey数量不要太多，可以分开查询。
 
-    19. where in (mappingkey)当mappingkey数量大于分表个数时，会不再查询mapping表，全直接全部扫业务sharding表，建议in mappingkey数量不要太多，可以分开查询。
+    19. where in (shardingkey)当shardingkey数量不建议大于sharding count,会很慢。若想提高每条SQL的执行时间，建议进一步减少传入shardingkey的数量。
 
-    20.  where in (shardingkey)当shardingkey数量不建议大于sharding count,会很慢。若想提高每条SQL的执行时间，建议进一步减少传入shardingkey的数量。
-
-    21. 关于分页，单片的limit操作，不受影响，直接发到数据库。
+    20. 关于分页，单片的limit操作，不受影响，直接发到数据库。
 
         跨片的limit操作，目前提供了一种非严格语义上的imit,具体如下:
 
@@ -119,13 +117,9 @@ permalink: /docs/sharding-limit/
    2. 字符集
    3. explicit_defaults_for_timestamp
 
-2. 确认DAL是否开启了SHARDING模式
+2. 目前DAL不支持值为blob(varbinary)的sharding
 
-3. 确认业务方是否有batch insert行为，如有需打开开关此功能已不再开放支持。
-
-4. 目前DAL不支持值为blob(varbinary)的sharding
-
-5. sharding表，unique index不能保证数据的全局唯一-性
+3. sharding表，unique index不能保证数据的全局唯一-性
 
 # Q&A
 
