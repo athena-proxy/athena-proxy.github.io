@@ -125,7 +125,7 @@ permalink: /docs/sharding-limit/
 
 一、在排障时，如何查询对应的sharding. key对应到哪个片?
 
-A:使用select help from dal dual; 查看select shard. _info对应的查询语句。
+A:使用select help from dal dual; 查看select shard_info对应的查询语句。
 
 (注意，这些语句仅做排障使用，不要在代码中使用这些对应的查询语句，如果你写了，请做好背锅准备! )
 
