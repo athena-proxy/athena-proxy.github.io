@@ -1,11 +1,3 @@
-- title: DAL接入
+- title: Getting Started
   docs:
-  - sharding-limit
-  - dal-php
-  - dal-cpp
-  - dal-globalid
-
-- title: DAL原理
-  docs:
-  - globalid
-  - mysql-handshake
+  - home
